@@ -1,10 +1,14 @@
-#include "holberton.h"
+#include "main.h"
 
 /**
- * print_alphabet -Make the alphabet
+ * print_alphabet - entry point
+ *
+ * Description: Prints the alphabet with _putchar
  *
  * Return: void
  */
+
+
 void print_alphabet(void)
 {
 	char c;
@@ -13,7 +17,5 @@ void print_alphabet(void)
 	{
 		_putchar(c);
 	}
-	
 	_putchar('\n');
 }
-
