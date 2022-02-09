@@ -1,29 +1,31 @@
 #include <stdio.h>
 
 /**
- * main - natural numbers multiples of 3 or 5 to 1024
- *
- * Return: always 0
- */
-
+  * main - Prints the first 52 fibonacci numbers
+  *
+  * Return: Nothing!
+  */
 int main(void)
 {
-	int s, t, f, tm, fm;
+        int i = 0;
+        long j = 1, k = 2;
 
-	s = 0;
-	for (t = 0; t <= (1024 / 3); t++)
-	{
-		tm = 3 * t;
-		s = s + tm;
-	}
-	for (f = 0; f <= (1024 / 5); f++)
-	{
-		if (!(f % 3 == 0))
-		{
-			fm = 5 * f;
-			s = s + fm;
-		}
-	}
-	printf("%i\n", s);
-	return (0);
+        while (i < 50)
+        {
+                if (i == 0)
+                        printf("%ld", j);
+                else if (i == 1)
+                        printf(", %ld", k);
+                else
+                {
+                        k += j;
+                        j = k - j;
+                        printf(", %ld", k);
+                }
+
+                ++i;
+        }
+
+        printf("\n");
+        return (0);
 }
