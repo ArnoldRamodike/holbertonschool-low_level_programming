@@ -1,2 +1,1 @@
-Holberton School Low-Level Programming
- Functions and nested loops
+Holberton School Low Level Programming Functions and Nested Loops
