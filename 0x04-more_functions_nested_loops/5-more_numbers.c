@@ -6,6 +6,7 @@
  * Return: void
  */
 
+
 void more_numbers(void)
 {
 	char a, b, c, i;
