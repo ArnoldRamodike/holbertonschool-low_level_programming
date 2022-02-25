@@ -2,47 +2,39 @@
 #include <stdlib.h>
 
 /**
- * main - function to print out the change that needs to given
- * @argc: number of arguments to be passed
- * @argv: number of variables to calculate
- * Return: always 0 for sucess
+ * main - prints minimum number of coins to make change for an amount of money.
+ * @argc: number of arguments passed to the function
+ * @argv: argument vector of pointers to strings
+ *
+ * Return: 0 if no errors, else 1
  */
-int main(int argc, char **argv)
+int main(int argc, char *argv[])
 {
-    int total, change;
-    if (argc < 2)
-    {
-        printf("Error\n");
-        return (1);
-    }
+	int a, n = 0, i, t;
+	int c[5] = {25, 10, 5, 2, 1};
 
-    change = atoi(argv[1]);
-
-    for (total = 0; change > 0; total++)
-    {
-        if (change - 25 >= 0)
-           change = change - 25;
-
-        else if (change - 10 >= 0)
-
-            change = change - 10;
-
-        else if (change - 5 >= 0)
-
-            change = change - 5;
-
-        else if (change - 2 >= 0)
-
-            change = change - 2;
-
-        else if (change - 1 >= 0)
-
-            change = change - 1;
-
-    }
-
-    printf("%d\n", total);
-
-    return (0);
-
+	if (argc != 2)
+	{
+		puts("Error");
+		return (1);
+	}
+	a = atoi(argv[1]);
+	if (a <= 0)
+	{
+		puts("0");
+		return (1);
+	}
+	else
+	{
+		for (i = 0; i < 5; i++)
+		{
+			t = a / c[i];
+			a -= t * c[i];
+			n += t;
+			if (a == 0)
+				break;
+		}
+	}
+	printf("%d\n", n);
+	return (0);
 }
