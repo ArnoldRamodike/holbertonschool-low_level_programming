@@ -1,3 +1,7 @@
-#include "main.h"
-#include <stdio.h>
 
+#ifndef HOLBERTON_H
+#define HOLBERTON_H
+
+int main (int argc, char *argv[]);
+
+#endif
