@@ -1,78 +1,61 @@
+#include "lists.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "lists.h"
 
 /**
- * add_nodeaddress - Add a node to a list with
- * @head: Pointer to the pointer of the start of the list
- * @address: The address of another list's node
+ * _r - reallocates memory for an array of pointers
+ * to the nodes in a linked list
+ * @list: the old list to append
+ * @size: size of the new list (always one more than the old list)
+ * @new: new node to add to the list
  *
- * Return: Address of new node, NULL if it fails
+ * Return: pointer to the new list
  */
-listadd_t *add_nodeaddress(listadd_t **head, const listint_t *address)
+const listint_t **_r(const listint_t **list, size_t size, const listint_t *new)
 {
-	listadd_t *new;
+	const listint_t **newlist;
+	size_t i;
 
-	new = malloc(sizeof(listint_t));
-	if (new == NULL)
+	newlist = malloc(size * sizeof(listint_t *));
+	if (newlist == NULL)
 	{
-		free_listadd(*head);
+		free(list);
 		exit(98);
 	}
-	new->address = (void *)address;
-	new->next = *head;
-	*head = new;
-	return (new);
+	for (i = 0; i < size - 1; i++)
+		newlist[i] = list[i];
+	newlist[i] = new;
+	free(list);
+	return (newlist);
 }
 
 /**
- * free_listadd - Free a list
- * @head: Pointer to the start of the list
- */
-void free_listadd(listadd_t *head)
-{
-	listadd_t *killnode;
-
-	while (head != NULL)
-	{
-		killnode = head;
-		head = head->next;
-		free(killnode);
-	}
-}
-
-/**
- * print_listint_safe - Print out a given list, but only once if it loops
- * @head: Pointer to the start of the list
+ * print_listint_safe - prints a listint_t linked list.
+ * @head: pointer to the start of the list
  *
- * Return: Number of nodes, if it fails print 98
+ * Return: the number of nodes in the list
  */
 size_t print_listint_safe(const listint_t *head)
 {
-	listadd_t *newhead;
-	listadd_t *checker;
-	unsigned int count;
+	size_t i, num = 0;
+	const listint_t **list = NULL;
 
-	count = 0;
-	newhead = NULL;
 	while (head != NULL)
 	{
-		checker = newhead;
-		while (checker != NULL)
+		for (i = 0; i < num; i++)
 		{
-			if (head == checker->address)
+			if (head == list[i])
 			{
 				printf("-> [%p] %d\n", (void *)head, head->n);
-				free_listadd(newhead);
-				return (count);
+				free(list);
+				return (num);
 			}
-			checker = checker->next;
 		}
+		num++;
+		list = _r(list, num, head);
 		printf("[%p] %d\n", (void *)head, head->n);
-		add_nodeaddress(&newhead, head);
 		head = head->next;
-		count++;
 	}
-	free_listadd(newhead);
-	return (count);
+	free(list);
+	return (num);
 }
