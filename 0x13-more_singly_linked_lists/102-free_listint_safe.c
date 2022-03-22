@@ -7,6 +7,7 @@
  * @h: Pointer to pointer to the start of the list
  * Return: Size of the list that has been freed
  */
+
 size_t free_listint_safe(listint_t **h)
 {
 	listint_t *killnode;
